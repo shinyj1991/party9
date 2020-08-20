@@ -8,11 +8,11 @@
       <div class="menu">
         <button type="button" :class="{on: tabIndex === 0}" @click="tabAction(0)">파티리스트</button>
         <button type="button" :class="{on: tabIndex === 1}" @click="tabAction(1)">동네퀘스트</button>
-        <div class="focus_line" :style="{transform: `translateX(${-containerPositionLeft * 2}%)`}"></div>
+        <div class="focus_line" :style="{transform: `translateX(${-containerPositionLeft * 2}%)`}" ref="focusLine"></div>
       </div>
     </header>
     <div class="container" :style="{transform: `translateX(${containerPositionLeft}%)`}" ref="container">
-      <div :class="{lock: scrollLock}" class="party_wrap" ref="partyWrap" @scroll="watchScroll">
+      <div class="party_wrap" @scroll="watchScroll">
         <ul>
           <li>
             <nuxt-link to="/">
@@ -160,7 +160,7 @@
           </li>
         </ul>
       </div>
-      <div :class="{lock: scrollLock}" class="party_wrap" ref="partyWrap2" @scroll="watchScroll">
+      <div class="party_wrap" @scroll="watchScroll">
         <ul>
           <li>
             <nuxt-link to="/">
@@ -194,10 +194,7 @@
 
   export default {
     data: () => ({
-      lastTouchY: false,
       headerPositionTop: 0,
-      scrollLock: false,
-      lockScrollY: 0,
 
       containerPositionLeft: 0,
       transitionSpeed: 300,
@@ -210,26 +207,17 @@
 
       startTime: null,
       moveTime: null,
+      endTime: null,
       allowedTime: 300,
 
       direction: null,
 
       tabIndex: 0,
 
-      lastScrollY: 0
+      lastScrollY: 0,
+
+      horizontalFlag: false
     }),
-    watch: {
-      scrollLock() {
-        if (this.scrollLock) {
-          // lock
-          this.lockScrollY = this.$refs.partyWrap.scrollTop;
-          this.$refs.partyWrap.addEventListener('touchmove', this.freezeScroll, { passive: false });
-        } else {
-          // unlock
-          this.$refs.partyWrap.removeEventListener('touchmove', this.freezeScroll, { passive: false });
-        }
-      }
-    },
     mounted() {
       window.addEventListener('touchstart', this.detectWindowTouchstart);
       window.addEventListener('touchmove', this.detectWindowTouchmove);
@@ -237,56 +225,6 @@
     },
     methods: {
       watchScroll() {
-        /*if (this.direction === 'vertical') {
-          if (this.lastTouchY > this.moveTouch.clientY) {
-            // down
-            if (this.headerPositionTop > -80) {
-              this.headerPositionTop = this.headerPositionTop - Math.abs(this.lastTouchY - this.moveTouch.clientY);
-              if (!this.scrollLock) {
-                // console.log('down lock');
-                this.scrollLock = true;
-              }
-            } else {
-              if (this.scrollLock) {
-                // console.log('down unlock');
-                this.headerPositionTop = -80;
-                this.scrollLock = false;
-              }
-            }
-          } else {
-            // up
-            if (this.headerPositionTop < 0) {
-              this.headerPositionTop = this.headerPositionTop + Math.abs(this.lastTouchY - this.moveTouch.clientY);
-              if (!this.scrollLock) {
-                // console.log('up lock');
-                this.scrollLock = true;
-              }
-            } else {
-              if (this.scrollLock) {
-                // console.log('up unlock');
-                this.headerPositionTop = 0;
-                this.scrollLock = false;
-              }
-            }
-          }
-          this.lastTouchY = this.moveTouch.clientY;
-          let computedPosition = this.headerPositionTop;
-          if (this.lastTouchY > this.moveTouch.clientY) {
-            // down
-            console.log('down');
-            computedPosition = computedPosition - Math.abs(this.lastTouchY - this.moveTouch.clientY);
-            computedPosition = computedPosition < -80 ? -80 : computedPosition;
-          } else {
-            // up
-            console.log('up');
-            computedPosition = computedPosition + Math.abs(this.lastTouchY - this.moveTouch.clientY);
-            computedPosition = computedPosition > 0 ? 0 : computedPosition;
-          }
-          console.log(computedPosition);
-          this.headerPositionTop = computedPosition;
-          this.lastTouchY = this.moveTouch.clientY;
-        }*/
-
         let computedPosition = this.headerPositionTop;
         if (this.lastScrollY - event.target.scrollTop > 0) {
           computedPosition = computedPosition + (this.lastScrollY - event.target.scrollTop);
@@ -297,11 +235,6 @@
         }
         this.headerPositionTop = computedPosition;
         this.lastScrollY = event.target.scrollTop;
-      },
-      freezeScroll(event) {
-        // console.log(event);
-        // event.preventDefault();
-        // this.$refs.partyWrap.scrollTo(0, this.lockScrollY);
       },
       tabAction(index) {
         this.$refs.container.style.transition = `all ${this.transitionSpeed}ms`;
@@ -318,14 +251,12 @@
         }, this.transitionSpeed);
       },
       detectWindowTouchstart() {
-        this.lastTouchY = false;
         this.startTime = new Date().getTime();
         this.startTouch = event.changedTouches[0];
+        this.horizontalFlag = false;
       },
       detectWindowTouchmove() {
         this.moveTouch = event.changedTouches[0];
-        this.lastTouchY = this.lastTouchY === false ? this.moveTouch.clientY : this.lastTouchY;
-
         this.moveTouchX = this.startTouch.clientX - this.moveTouch.clientX;
         this.moveTouchY = this.startTouch.clientY - this.moveTouch.clientY;
 
@@ -342,32 +273,50 @@
         if (this.direction === 'horizontal') {
           if (!(this.tabIndex === 0 && this.moveTouchX < 0) && !(this.tabIndex === 1 && this.moveTouchX > 0)) {
             this.containerPositionLeft = -this.moveTouchX / 750 * 50 + (-50 * this.tabIndex);
+            this.horizontalFlag = true;
+          } else {
+            this.horizontalFlag = false;
           }
         }
       },
       detectWindowTouchend() {
-        this.lastTouchY = false;
-
+        this.$refs.focusLine.style.transition = `all ${this.transitionSpeed}ms`;
         this.$refs.container.style.transition = `all ${this.transitionSpeed}ms`;
         this.$refs.header.style.transition = `all ${this.transitionSpeed}ms`;
 
-        if (this.containerPositionLeft > -25) {
-          this.containerPositionLeft = 0;
-          this.tabIndex = 0;
+        console.log(Math.abs(this.moveTouchX / this.moveTime));
+
+        if (Math.abs(this.moveTouchX / this.moveTime) > 1 && this.horizontalFlag) {
+          if (this.tabIndex === 0) {
+            this.containerPositionLeft = -50;
+            this.tabIndex = 1;
+          } else if (this.tabIndex === 1) {
+            this.containerPositionLeft = 0;
+            this.tabIndex = 0;
+          }
         } else {
-          this.containerPositionLeft = -50;
-          this.tabIndex = 1;
+          if (this.containerPositionLeft > -25) {
+            this.containerPositionLeft = 0;
+            this.tabIndex = 0;
+          } else {
+            this.containerPositionLeft = -50;
+            this.tabIndex = 1;
+          }
         }
-        this.lastScrollY = this.$refs.container.children[this.tabIndex].scrollTop
+
+        this.lastScrollY = this.$refs.container.children[this.tabIndex].scrollTop;
 
         if (Math.abs(this.moveTouchX) > 375) {
           this.headerPositionTop = 0;
         }
 
         setTimeout(() => {
+          this.$refs.focusLine.style.transition = 'none';
           this.$refs.container.style.transition = 'none';
           this.$refs.header.style.transition = 'none';
         }, this.transitionSpeed);
+
+        this.horizontalFlag = false;
       }
     }
   }
