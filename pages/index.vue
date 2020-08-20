@@ -6,8 +6,8 @@
         <button type="button" class="sort" :style="{backgroundImage: `url(${require('~/assets/images/ico/sort_512x512_black.png')})`}">정렬</button>
       </div>
       <div class="menu">
-        <button type="button" :class="{on: tabIndex === 0}">파티리스트</button>
-        <button type="button" :class="{on: tabIndex === 1}">동네퀘스트</button>
+        <button type="button" :class="{on: tabIndex === 0}" @click="tabAction(0)">파티리스트</button>
+        <button type="button" :class="{on: tabIndex === 1}" @click="tabAction(1)">동네퀘스트</button>
         <div class="focus_line" :style="{transform: `translateX(${-containerPositionLeft * 2}%)`}"></div>
       </div>
     </header>
@@ -165,145 +165,22 @@
           <li>
             <nuxt-link to="/">
               <div class="cate"></div>
-              <p class="name">7시 도림천에서 3:3 농구조질 파티구함</p>
-              <p class="area">도림천 돌바닥</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
+              <p class="name">음료수서비스드려요~</p>
+              <p class="area">깐부치킨 신림점</p>
             </nuxt-link>
           </li>
           <li>
             <nuxt-link to="/">
               <div class="cate"></div>
-              <p class="name">퇴근하고 호치킨에서 치맥한잔하실분</p>
-              <p class="area">신림동 호치킨</p>
-              <p class="when">내일 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
+              <p class="name">10% 할인 이벤트!</p>
+              <p class="area">제주돈네 생오겹살</p>
             </nuxt-link>
           </li>
           <li>
             <nuxt-link to="/">
               <div class="cate"></div>
-              <p class="name">이마트 양파 한망 사서 소분할 파티구함</p>
-              <p class="area">서울대입구 하이마트</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">롤 5인큐 돌릴 정글러 구함 (실버 ~ 골드)</p>
-              <p class="area">온라인</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">7시 도림천에서 3:3 농구조질 파티구함</p>
-              <p class="area">도림천 돌바닥</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">퇴근하고 호치킨에서 치맥한잔하실분</p>
-              <p class="area">신림동 호치킨</p>
-              <p class="when">내일 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">이마트 양파 한망 사서 소분할 파티구함</p>
-              <p class="area">서울대입구 하이마트</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">롤 5인큐 돌릴 정글러 구함 (실버 ~ 골드)</p>
-              <p class="area">온라인</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">7시 도림천에서 3:3 농구조질 파티구함</p>
-              <p class="area">도림천 돌바닥</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">퇴근하고 호치킨에서 치맥한잔하실분</p>
-              <p class="area">신림동 호치킨</p>
-              <p class="when">내일 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">이마트 양파 한망 사서 소분할 파티구함</p>
-              <p class="area">서울대입구 하이마트</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">롤 5인큐 돌릴 정글러 구함 (실버 ~ 골드)</p>
-              <p class="area">온라인</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">7시 도림천에서 3:3 농구조질 파티구함</p>
-              <p class="area">도림천 돌바닥</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">퇴근하고 호치킨에서 치맥한잔하실분</p>
-              <p class="area">신림동 호치킨</p>
-              <p class="when">내일 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">이마트 양파 한망 사서 소분할 파티구함</p>
-              <p class="area">서울대입구 하이마트</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/">
-              <div class="cate"></div>
-              <p class="name">롤 5인큐 돌릴 정글러 구함 (실버 ~ 골드)</p>
-              <p class="area">온라인</p>
-              <p class="when">오늘 / 오후 7시</p>
-              <p class="stat">2 / 5</p>
+              <p class="name">생맥주 3 + 1 오세요</p>
+              <p class="area">세계맥주</p>
             </nuxt-link>
           </li>
         </ul>
@@ -426,6 +303,20 @@
         // event.preventDefault();
         // this.$refs.partyWrap.scrollTo(0, this.lockScrollY);
       },
+      tabAction(index) {
+        this.$refs.container.style.transition = `all ${this.transitionSpeed}ms`;
+        this.$refs.header.style.transition = `all ${this.transitionSpeed}ms`;
+
+        this.containerPositionLeft = index * -50;
+        this.tabIndex = index;
+        this.lastScrollY = this.$refs.container.children[index].scrollTop;
+        this.headerPositionTop = 0;
+
+        setTimeout(() => {
+          this.$refs.container.style.transition = 'none';
+          this.$refs.header.style.transition = 'none';
+        }, this.transitionSpeed);
+      },
       detectWindowTouchstart() {
         this.lastTouchY = false;
         this.startTime = new Date().getTime();
@@ -463,12 +354,11 @@
         if (this.containerPositionLeft > -25) {
           this.containerPositionLeft = 0;
           this.tabIndex = 0;
-          this.lastScrollY = this.$refs.partyWrap.scrollTop;
         } else {
           this.containerPositionLeft = -50;
           this.tabIndex = 1;
-          this.lastScrollY = this.$refs.partyWrap2.scrollTop;
         }
+        this.lastScrollY = this.$refs.container.children[this.tabIndex].scrollTop
 
         if (Math.abs(this.moveTouchX) > 375) {
           this.headerPositionTop = 0;
