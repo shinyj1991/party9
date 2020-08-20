@@ -223,6 +223,12 @@
       window.addEventListener('touchmove', this.detectWindowTouchmove);
       window.addEventListener('touchend', this.detectWindowTouchend);
     },
+    watch: {
+      tabIndex() {
+        this.headerPositionTop = 0;
+        this.containerPositionLeft = this.tabIndex * -50;
+      }
+    },
     methods: {
       watchScroll() {
         let computedPosition = this.headerPositionTop;
@@ -243,7 +249,6 @@
         this.containerPositionLeft = index * -50;
         this.tabIndex = index;
         this.lastScrollY = this.$refs.container.children[index].scrollTop;
-        this.headerPositionTop = 0;
 
         setTimeout(() => {
           this.$refs.container.style.transition = 'none';
@@ -284,31 +289,17 @@
         this.$refs.container.style.transition = `all ${this.transitionSpeed}ms`;
         this.$refs.header.style.transition = `all ${this.transitionSpeed}ms`;
 
-        console.log(Math.abs(this.moveTouchX / this.moveTime));
-
         if (Math.abs(this.moveTouchX / this.moveTime) > 1 && this.horizontalFlag) {
-          if (this.tabIndex === 0) {
-            this.containerPositionLeft = -50;
-            this.tabIndex = 1;
-          } else if (this.tabIndex === 1) {
-            this.containerPositionLeft = 0;
-            this.tabIndex = 0;
-          }
+          this.tabIndex = this.tabIndex === 0 ? 1 : 0;
         } else {
-          if (this.containerPositionLeft > -25) {
-            this.containerPositionLeft = 0;
-            this.tabIndex = 0;
+          if (Math.abs(this.moveTouchX) > 375) {
+            this.tabIndex = this.tabIndex === 0 ? 1 : 0;
           } else {
-            this.containerPositionLeft = -50;
-            this.tabIndex = 1;
+            this.containerPositionLeft = this.tabIndex * -50;
           }
         }
 
         this.lastScrollY = this.$refs.container.children[this.tabIndex].scrollTop;
-
-        if (Math.abs(this.moveTouchX) > 375) {
-          this.headerPositionTop = 0;
-        }
 
         setTimeout(() => {
           this.$refs.focusLine.style.transition = 'none';
