@@ -1,5 +1,5 @@
 <template>
-  <article id="main" :style="{transform: `translateY(${headerPositionTop}px)`}">
+  <article id="main" :style="{transform: `translateY(${headerPositionTop}px)`}" ref="header">
     <header class="header">
       <div class="head">
         <button type="button" class="area">신림동</button>
@@ -12,7 +12,7 @@
       </div>
     </header>
     <div class="container" :style="{transform: `translateX(${containerPositionLeft}%)`}" ref="container">
-      <div :class="{lock: scrollLock}" class="party_wrap" ref="partyWrap">
+      <div :class="{lock: scrollLock}" class="party_wrap" ref="partyWrap" @scroll="watchScroll">
         <ul>
           <li>
             <nuxt-link to="/">
@@ -160,7 +160,7 @@
           </li>
         </ul>
       </div>
-      <div :class="{lock: scrollLock}" class="party_wrap" ref="partyWrap2">
+      <div :class="{lock: scrollLock}" class="party_wrap" ref="partyWrap2" @scroll="watchScroll">
         <ul>
           <li>
             <nuxt-link to="/">
@@ -323,7 +323,7 @@
       lockScrollY: 0,
 
       containerPositionLeft: 0,
-      containerTransitionSpeed: 300,
+      transitionSpeed: 300,
 
       startTouch: null,
       moveTouch: null,
@@ -337,7 +337,9 @@
 
       direction: null,
 
-      tabIndex: 0
+      tabIndex: 0,
+
+      lastScrollY: 0
     }),
     watch: {
       scrollLock() {
@@ -357,6 +359,68 @@
       window.addEventListener('touchend', this.detectWindowTouchend);
     },
     methods: {
+      watchScroll() {
+        /*if (this.direction === 'vertical') {
+          if (this.lastTouchY > this.moveTouch.clientY) {
+            // down
+            if (this.headerPositionTop > -80) {
+              this.headerPositionTop = this.headerPositionTop - Math.abs(this.lastTouchY - this.moveTouch.clientY);
+              if (!this.scrollLock) {
+                // console.log('down lock');
+                this.scrollLock = true;
+              }
+            } else {
+              if (this.scrollLock) {
+                // console.log('down unlock');
+                this.headerPositionTop = -80;
+                this.scrollLock = false;
+              }
+            }
+          } else {
+            // up
+            if (this.headerPositionTop < 0) {
+              this.headerPositionTop = this.headerPositionTop + Math.abs(this.lastTouchY - this.moveTouch.clientY);
+              if (!this.scrollLock) {
+                // console.log('up lock');
+                this.scrollLock = true;
+              }
+            } else {
+              if (this.scrollLock) {
+                // console.log('up unlock');
+                this.headerPositionTop = 0;
+                this.scrollLock = false;
+              }
+            }
+          }
+          this.lastTouchY = this.moveTouch.clientY;
+          let computedPosition = this.headerPositionTop;
+          if (this.lastTouchY > this.moveTouch.clientY) {
+            // down
+            console.log('down');
+            computedPosition = computedPosition - Math.abs(this.lastTouchY - this.moveTouch.clientY);
+            computedPosition = computedPosition < -80 ? -80 : computedPosition;
+          } else {
+            // up
+            console.log('up');
+            computedPosition = computedPosition + Math.abs(this.lastTouchY - this.moveTouch.clientY);
+            computedPosition = computedPosition > 0 ? 0 : computedPosition;
+          }
+          console.log(computedPosition);
+          this.headerPositionTop = computedPosition;
+          this.lastTouchY = this.moveTouch.clientY;
+        }*/
+
+        let computedPosition = this.headerPositionTop;
+        if (this.lastScrollY - event.target.scrollTop > 0) {
+          computedPosition = computedPosition + (this.lastScrollY - event.target.scrollTop);
+          computedPosition = computedPosition > 0 ? 0 : computedPosition;
+        } else {
+          computedPosition = computedPosition + (this.lastScrollY - event.target.scrollTop);
+          computedPosition = computedPosition < -80 ? -80 : computedPosition;
+        }
+        this.headerPositionTop = computedPosition;
+        this.lastScrollY = event.target.scrollTop;
+      },
       freezeScroll(event) {
         // console.log(event);
         // event.preventDefault();
@@ -389,73 +453,31 @@
             this.containerPositionLeft = -this.moveTouchX / 750 * 50 + (-50 * this.tabIndex);
           }
         }
-
-        if (this.direction === 'vertical') {
-          /*if (this.lastTouchY > this.moveTouch.clientY) {
-            // down
-            if (this.headerPositionTop > -80) {
-              this.headerPositionTop = this.headerPositionTop - Math.abs(this.lastTouchY - this.moveTouch.clientY);
-              if (!this.scrollLock) {
-                // console.log('down lock');
-                this.scrollLock = true;
-              }
-            } else {
-              if (this.scrollLock) {
-                // console.log('down unlock');
-                this.headerPositionTop = -80;
-                this.scrollLock = false;
-              }
-            }
-          } else {
-            // up
-            if (this.headerPositionTop < 0) {
-              this.headerPositionTop = this.headerPositionTop + Math.abs(this.lastTouchY - this.moveTouch.clientY);
-              if (!this.scrollLock) {
-                // console.log('up lock');
-                this.scrollLock = true;
-              }
-            } else {
-              if (this.scrollLock) {
-                // console.log('up unlock');
-                this.headerPositionTop = 0;
-                this.scrollLock = false;
-              }
-            }
-          }
-          this.lastTouchY = this.moveTouch.clientY;*/
-          let computedPosition = this.headerPositionTop;
-          if (this.lastTouchY > this.moveTouch.clientY) {
-            // down
-            console.log('down');
-            computedPosition = computedPosition - Math.abs(this.lastTouchY - this.moveTouch.clientY);
-            computedPosition = computedPosition < -80 ? -80 : computedPosition;
-          } else {
-            // up
-            console.log('up');
-            computedPosition = computedPosition + Math.abs(this.lastTouchY - this.moveTouch.clientY);
-            computedPosition = computedPosition > 0 ? 0 : computedPosition;
-          }
-          console.log(computedPosition);
-          this.headerPositionTop = computedPosition;
-          this.lastTouchY = this.moveTouch.clientY;
-        }
       },
       detectWindowTouchend() {
         this.lastTouchY = false;
 
-        this.$refs.container.style.transition = `all ${this.containerTransitionSpeed}ms`;
+        this.$refs.container.style.transition = `all ${this.transitionSpeed}ms`;
+        this.$refs.header.style.transition = `all ${this.transitionSpeed}ms`;
 
         if (this.containerPositionLeft > -25) {
           this.containerPositionLeft = 0;
           this.tabIndex = 0;
+          this.lastScrollY = this.$refs.partyWrap.scrollTop;
         } else {
           this.containerPositionLeft = -50;
           this.tabIndex = 1;
+          this.lastScrollY = this.$refs.partyWrap2.scrollTop;
+        }
+
+        if (Math.abs(this.moveTouchX) > 375) {
+          this.headerPositionTop = 0;
         }
 
         setTimeout(() => {
           this.$refs.container.style.transition = 'none';
-        }, this.containerTransitionSpeed);
+          this.$refs.header.style.transition = 'none';
+        }, this.transitionSpeed);
       }
     }
   }
