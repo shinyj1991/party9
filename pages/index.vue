@@ -1,9 +1,9 @@
 <template>
-  <article id="main" :style="{marginTop: `${headerPositionTop}px`}">
+  <article id="main" :style="{transform: `translateY(${headerPositionTop}px)`}">
     <header class="header">
       <div class="head">
         <button type="button" class="area">신림동</button>
-        <button type="button" class="sort" :style="{ backgroundImage: `url(${require('~/assets/images/ico/sort_512x512_black.png')})` }">정렬</button>
+        <button type="button" class="sort" :style="{backgroundImage: `url(${require('~/assets/images/ico/sort_512x512_black.png')})`}">정렬</button>
       </div>
       <div class="menu">
         <button type="button" :class="{on: tabIndex === 0}">파티리스트</button>
@@ -391,7 +391,7 @@
         }
 
         if (this.direction === 'vertical') {
-          if (this.lastTouchY > this.moveTouch.clientY) {
+          /*if (this.lastTouchY > this.moveTouch.clientY) {
             // down
             if (this.headerPositionTop > -80) {
               this.headerPositionTop = this.headerPositionTop - Math.abs(this.lastTouchY - this.moveTouch.clientY);
@@ -422,6 +422,21 @@
               }
             }
           }
+          this.lastTouchY = this.moveTouch.clientY;*/
+          let computedPosition = this.headerPositionTop;
+          if (this.lastTouchY > this.moveTouch.clientY) {
+            // down
+            console.log('down');
+            computedPosition = computedPosition - Math.abs(this.lastTouchY - this.moveTouch.clientY);
+            computedPosition = computedPosition < -80 ? -80 : computedPosition;
+          } else {
+            // up
+            console.log('up');
+            computedPosition = computedPosition + Math.abs(this.lastTouchY - this.moveTouch.clientY);
+            computedPosition = computedPosition > 0 ? 0 : computedPosition;
+          }
+          console.log(computedPosition);
+          this.headerPositionTop = computedPosition;
           this.lastTouchY = this.moveTouch.clientY;
         }
       },
