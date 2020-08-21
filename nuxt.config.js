@@ -28,6 +28,10 @@ module.exports = {
     mode: 'in-out'
   },*/
   loading: { color: '#ffffff' },
+  modules: ['@nuxtjs/style-resources'],
+  styleResources: {
+    scss: ['~/assets/scss/_variable.scss'] // 전역 scss함수 사용
+  },
   css: [
     {src: '~/assets/scss/reset.scss', lang: 'scss'},
     {src: '~/assets/scss/common.scss', lang: 'scss'}

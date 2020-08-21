@@ -2,7 +2,6 @@
   <article id="main" :style="{transform: `translateY(${headerPositionTop}px)`}" ref="header">
     <header class="header">
       <div class="head">
-        <button type="button" class="area">신림동</button>
         <nuxt-link to="/party/range" v-if="tabIndex === 0" class="sort" :style="{backgroundImage: `url(${require('~/assets/images/ico/sort_512x512_black.png')})`}">정렬</nuxt-link>
       </div>
       <div class="menu">
@@ -314,7 +313,7 @@
 <style lang="scss">
 #main {overflow: hidden; position: relative; height: 100vh; padding: 160px 0 100px;
   .header {position: absolute; top: 0; right: 0; left: 0; z-index: 100; height: 160px; padding: 0 30px; border-bottom: 2px solid #cccccc; background: #ffffff;
-    .head {
+    .head {height: 80px;
       .area {position: relative; height: 80px; padding: 0 30px 0 0; font-weight: 700; font-size: 32px;
         &:after {display: block; content: ''; position: absolute; right: 0; top: 35px; border-top: 10px solid #666666; border-right: 8px solid transparent; border-left: 8px solid transparent;}
       }
