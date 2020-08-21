@@ -3,7 +3,7 @@
     <header class="header">
       <div class="head">
         <button type="button" class="area">신림동</button>
-        <button type="button" class="sort" :style="{backgroundImage: `url(${require('~/assets/images/ico/sort_512x512_black.png')})`}">정렬</button>
+        <nuxt-link to="/party/range" v-if="tabIndex === 0" class="sort" :style="{backgroundImage: `url(${require('~/assets/images/ico/sort_512x512_black.png')})`}">정렬</nuxt-link>
       </div>
       <div class="menu">
         <button type="button" :class="{on: tabIndex === 0}" @click="tabAction(0)">파티리스트</button>
@@ -285,29 +285,27 @@
         }
       },
       detectWindowTouchend() {
-        this.$refs.focusLine.style.transition = `all ${this.transitionSpeed}ms`;
-        this.$refs.container.style.transition = `all ${this.transitionSpeed}ms`;
-        this.$refs.header.style.transition = `all ${this.transitionSpeed}ms`;
+        if (this.direction === 'horizontal') {
+          this.$refs.focusLine.style.transition = `all ${this.transitionSpeed}ms`;
+          this.$refs.container.style.transition = `all ${this.transitionSpeed}ms`;
+          this.$refs.header.style.transition = `all ${this.transitionSpeed}ms`;
 
-        if (Math.abs(this.moveTouchX / this.moveTime) > 1 && this.horizontalFlag) {
-          this.tabIndex = this.tabIndex === 0 ? 1 : 0;
-        } else {
-          if (Math.abs(this.moveTouchX) > 375) {
+          if (Math.abs(this.moveTouchX / this.moveTime) > 1 && this.horizontalFlag || Math.abs(this.moveTouchX) > 375 && this.horizontalFlag) {
             this.tabIndex = this.tabIndex === 0 ? 1 : 0;
           } else {
             this.containerPositionLeft = this.tabIndex * -50;
           }
+
+          this.lastScrollY = this.$refs.container.children[this.tabIndex].scrollTop;
+
+          setTimeout(() => {
+            this.$refs.focusLine.style.transition = 'none';
+            this.$refs.container.style.transition = 'none';
+            this.$refs.header.style.transition = 'none';
+          }, this.transitionSpeed);
+
+          this.horizontalFlag = false;
         }
-
-        this.lastScrollY = this.$refs.container.children[this.tabIndex].scrollTop;
-
-        setTimeout(() => {
-          this.$refs.focusLine.style.transition = 'none';
-          this.$refs.container.style.transition = 'none';
-          this.$refs.header.style.transition = 'none';
-        }, this.transitionSpeed);
-
-        this.horizontalFlag = false;
       }
     }
   }
@@ -317,7 +315,7 @@
 #main {overflow: hidden; position: relative; height: 100vh; padding: 160px 0 100px;
   .header {position: absolute; top: 0; right: 0; left: 0; z-index: 100; height: 160px; padding: 0 30px; border-bottom: 2px solid #cccccc; background: #ffffff;
     .head {
-      .area {position: relative; height: 80px; padding: 0 30px 0 0;
+      .area {position: relative; height: 80px; padding: 0 30px 0 0; font-weight: 700; font-size: 32px;
         &:after {display: block; content: ''; position: absolute; right: 0; top: 35px; border-top: 10px solid #666666; border-right: 8px solid transparent; border-left: 8px solid transparent;}
       }
       .sort {display: block; position: absolute; top: 10px; right: 10px; width: 80px; height: 80px; background: center center no-repeat; text-indent: -9999em; background-size: 50px 50px;}

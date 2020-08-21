@@ -23,6 +23,10 @@ module.exports = {
   generate: {
     fallback: true
   },
+  /*layoutTransition: {
+    name: 'layout',
+    mode: 'in-out'
+  },*/
   loading: { color: '#ffffff' },
   css: [
     {src: '~/assets/scss/reset.scss', lang: 'scss'},
