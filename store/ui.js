@@ -1,6 +1,7 @@
 export const state = () => ({
   loaded: true,
-  menuFlag: false
+  menuFlag: false,
+  appLoaded: false
 });
 
 export const mutations = {
@@ -12,5 +13,8 @@ export const mutations = {
   },
   toggleMenu: (state) => {
     state.menuFlag = !state.menuFlag;
+  },
+  completedAppLoad: (state) => {
+    state.appLoaded = true;
   }
 };

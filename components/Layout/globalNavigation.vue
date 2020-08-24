@@ -1,8 +1,8 @@
 <template>
   <nav id="globalNavigation">
-    <nuxt-link to="/" class="m1 on">파티목록</nuxt-link>
+    <nuxt-link to="/party/list" class="m1 on">파티목록</nuxt-link>
     <nuxt-link to="/party/create" class="m2">파티원모집</nuxt-link>
-    <nuxt-link to="/" class="m3">마이페이지</nuxt-link>
+    <nuxt-link to="/party/list" class="m3">마이페이지</nuxt-link>
   </nav>
 </template>
 

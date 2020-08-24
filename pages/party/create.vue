@@ -15,7 +15,6 @@
     data: () => ({
       title: ''
     }),
-    layout: 'popup',
     methods: {}
     
   }
@@ -24,7 +23,7 @@
 <style lang="scss">
 #partyCreate {
   .header {display: flex; align-items: center; position: fixed; top: 0; right: 0; left: 0; height: $headerHeight; padding: 0 30px; border-bottom: 2px solid #cccccc;
-    .back {width: 60px; height: 60px; background: center center no-repeat; text-indent: -9999em;}
+    .back {width: 60px; height: 60px; background: url(~static/images/ico/back_30x30_black.png) center center no-repeat; text-indent: -9999em;}
     .title {margin: 0 0 0 10px; font-weight: 700; font-size: 32px;}
     .done {margin-left: auto; font-size: 28px;}
   }
