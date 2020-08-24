@@ -1,7 +1,7 @@
 <template>
   <article id="partyRange">
     <header class="header">
-      <nuxt-link to="/" class="back" :style="{ backgroundImage: `url(${require('~/assets/images/ico/back_30x30_black.png')})` }">뒤로가기</nuxt-link>
+      <nuxt-link to="/party/list" class="back" :style="{ backgroundImage: `url(${require('~/assets/images/ico/back_30x30_black.png')})` }">뒤로가기</nuxt-link>
       <h1 class="title">카테고리 설정</h1>
     </header>
     <div class="container">
