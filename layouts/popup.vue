@@ -15,6 +15,6 @@ export default {
 </script>
 
 <style lang="scss">
-#popup {width: 750px; min-height: 100vh; margin: 0 auto; background: #ffffff;}
+#popup {width: 750px; min-height: 100vh; margin: 0 auto; padding: 0 0 100px; background: #ffffff;}
 </style>
 
