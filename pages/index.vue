@@ -1,6 +1,6 @@
 <template>
   <article id="index">
-    hello
+    <p>hello</p>
   </article>
 </template>
 
@@ -15,7 +15,3 @@
     
   }
 </script>
-
-<style lang="scss">
-#index {}
-</style>
