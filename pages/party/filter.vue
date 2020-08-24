@@ -2,7 +2,7 @@
   <article id="partyRange">
     <header class="header">
       <div class="left">
-        <nuxt-link to="/party/list" class="back" :style="{ backgroundImage: `url(${require('~/assets/images/ico/back_30x30_black.png')})` }">뒤로가기</nuxt-link>
+        <nuxt-link to="/party/list" class="back">뒤로가기</nuxt-link>
       </div>
       <h1 class="title">카테고리 선택</h1>
     </header>
@@ -58,7 +58,7 @@
 <style lang="scss">
 #partyRange {overflow: hidden; position: relative; padding: 100px 0 0;
   .header {display: flex; align-items: center; position: fixed; top: 0; right: 0; left: 0; height: 100px; padding: 0 30px; border-bottom: 2px solid #b7b7b7;
-    .back {display: block; width: 60px; height: 60px; background: center center no-repeat; text-indent: -9999em;}
+    .back {display: block; width: 60px; height: 60px; background: url(~static/images/ico/back_30x30_black.png) center center no-repeat; text-indent: -9999em;}
     .title {margin: 0 0 0 10px; font-weight: 700; font-size: 32px;}
   }
   .container {padding: 50px;
