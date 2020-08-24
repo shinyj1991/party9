@@ -1,7 +1,7 @@
 <template>
   <article id="partyCreate">
     <header class="header">
-      <nuxt-link to="/party/list" class="back">뒤로가기</nuxt-link>
+      <a @click="$router.go(-1)" class="back">뒤로가기</a>
       <h1 class="title">파티원모집</h1>
       <button type="button" class="done">완료</button>
     </header>
@@ -15,6 +15,7 @@
     data: () => ({
       title: ''
     }),
+    layout: 'popup',
     methods: {}
     
   }

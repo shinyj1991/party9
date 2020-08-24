@@ -1,7 +1,9 @@
 export const state = () => ({
   loaded: true,
   menuFlag: false,
-  appLoaded: false
+  appLoaded: false,
+
+  globalNaviIndex: 1
 });
 
 export const mutations = {
@@ -16,5 +18,8 @@ export const mutations = {
   },
   completedAppLoad: (state) => {
     state.appLoaded = true;
+  },
+  changeGlobalNaviIndex: (state, index) => {
+    state.globalNaviIndex = index;
   }
 };

@@ -2,7 +2,7 @@
   <article id="partyRange">
     <header class="header">
       <div class="left">
-        <nuxt-link to="/party/list" class="back">뒤로가기</nuxt-link>
+        <a @click="$router.go(-1)" class="back">뒤로가기</a>
       </div>
       <h1 class="title">카테고리 선택</h1>
     </header>

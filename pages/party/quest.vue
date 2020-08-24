@@ -2,7 +2,7 @@
   <article id="partyQuest">
     <header class="header">
       <div class="left">
-        <nuxt-link to="/party/list" class="back">뒤로가기</nuxt-link>
+        <a @click="$router.go(-1)" class="back">뒤로가기</a>
       </div>
       <div class="right">
         <button type="button" class="export">공유하기</button>
@@ -159,8 +159,8 @@
     }),
     layout: 'popup',
     mounted() {
-      this.$refs.detail.addEventListener('touchstart', this.detectWindowTouchstart);
-      this.$refs.detail.addEventListener('touchmove', this.detectWindowTouchmove);
+      this.$refs.detail.addEventListener('touchstart', this.detectWindowTouchstart, {passive: true});
+      this.$refs.detail.addEventListener('touchmove', this.detectWindowTouchmove, {passive: true});
       this.$refs.detail.addEventListener('touchend', this.detectWindowTouchend);
 
       this.innerHeight = this.$refs.inner.children[this.tabIndex].offsetHeight;

@@ -2,7 +2,7 @@
   <article id="partyDetail">
     <header class="header">
       <div class="left">
-        <nuxt-link to="/party/list" class="back">뒤로가기</nuxt-link>
+        <a @click="$router.go(-1)" class="back">뒤로가기</a>
       </div>
       <div class="right">
         <button type="button" class="export">공유하기</button>
