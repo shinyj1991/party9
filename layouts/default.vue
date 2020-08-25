@@ -1,6 +1,7 @@
 <template>
   <div id="default" :class="{ loaded: appLoaded }">
     <nuxt/>
+    <global-navigation></global-navigation>
   </div>
 </template>
 

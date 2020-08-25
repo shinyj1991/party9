@@ -24,6 +24,7 @@ module.exports = {
       { rel: 'stylesheet', href: '//fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap' }
     ],
     script: [
+      { src: 'https://developers.kakao.com/sdk/js/kakao.min.js' },
       { src: '//dapi.kakao.com/v2/maps/sdk.js?appkey=b09efe6458aecd4ee00d548ee66266a1' }
     ]
   },

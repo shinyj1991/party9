@@ -1,7 +1,6 @@
 <template>
   <article id="index">
     <p>Mypage</p>
-    <global-navigation></global-navigation>
   </article>
 </template>
 
