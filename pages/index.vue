@@ -14,9 +14,7 @@
       title: ''
     }),
     mounted() {
-      Kakao.init('b09efe6458aecd4ee00d548ee66266a1');
-
-      console.log(Kakao);
+      // Kakao.init('b09efe6458aecd4ee00d548ee66266a1');
     },
     methods: {
       kakaoLogin() {

@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="store_info">
-            <div class="map"></div>
+            <div id="map" class="map"></div>
             <dl class="info">
               <dt>가게안내</dt>
               <dd class="tel">02-3442-0127</dd>
@@ -164,6 +164,20 @@
       this.$refs.detail.addEventListener('touchend', this.detectWindowTouchend);
 
       this.innerHeight = this.$refs.inner.children[this.tabIndex].offsetHeight;
+
+      let mapArea = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+      let options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(37.54699, 127.09598), //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+      };
+
+      let map = new kakao.maps.Map(mapArea, options);
+
+      let marker = new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(37.54699, 127.09598)
+      });
+
+      marker.setMap(map);
     },
     watch: {
       tabIndex() {
@@ -192,6 +206,9 @@
         this.horizontalFlag = false;
       },
       detectWindowTouchmove() {
+        if (event.target.tagName === 'svg') {
+          return;
+        }
         this.moveTouch = event.changedTouches[0];
         this.moveTouchX = this.startTouch.clientX - this.moveTouch.clientX;
         this.moveTouchY = this.startTouch.clientY - this.moveTouch.clientY;

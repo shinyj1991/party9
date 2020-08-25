@@ -314,7 +314,7 @@
 </script>
 
 <style lang="scss">
-#main {overflow: hidden; position: relative; height: 100vh; padding: calc(#{$headerHeight} * 2) 0 100px;
+#main {overflow: hidden; height: 100vh; padding: calc(#{$headerHeight} * 2) 0 100px;
   .header {position: absolute; top: 0; right: 0; left: 0; z-index: 100; height: 160px; padding: 0 30px; border-bottom: 2px solid #b7b7b7; background: #ffffff;
     .head {display: flex; justify-content: space-between; align-items: center; height: $headerHeight;
       .area {position: relative; padding: 0 30px 0 0; font-weight: 700; line-height: $headerHeight; font-size: 32px;
