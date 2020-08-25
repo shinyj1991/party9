@@ -1,6 +1,15 @@
+import path from 'path';
+import fs from 'fs';
+
 const BASE_DIR = process.env.BASE_DIR || '';
 
 module.exports = {
+  server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
+    }
+  },
   head: {
     title: 'PARTY9',
     meta: [
@@ -10,9 +19,12 @@ module.exports = {
       { name: 'theme-color', content: '#000000' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/static/favicon.ico' },
       { rel: 'stylesheet', href: '//fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap' },
       { rel: 'stylesheet', href: '//fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap' }
+    ],
+    script: [
+      { src: 'https://developers.kakao.com/sdk/js/kakao.min.js' }
     ]
   },
   router: {
