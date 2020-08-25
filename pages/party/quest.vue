@@ -267,7 +267,7 @@
 </script>
 
 <style lang="scss" scope>
-#partyQuest {overflow: hidden; padding: 0 0 100px;
+#partyQuest {overflow: hidden; padding: 0 0 200px;
   .header {display: flex; justify-content: space-between; align-items: center; position: absolute; top: 0; right: 0; left: 0; z-index: 10; height: $headerHeight; padding: 0 20px;
     .back {display: block; width: 60px; height: 60px; background: url(~static/images/ico/back_30x30_white.png) center center no-repeat; text-indent: -9999em;}
     .export {width: 60px; height: 60px; background: url(~static/images/ico/export_30x30_white.png) center center no-repeat; text-indent: -9999em;}
