@@ -27,50 +27,10 @@
     </div>
     <div class="add_location" v-if="step === 2">
       <div class="depth1">
-        <label><input type="radio"><span>서울특별시</span></label>
-        <label><input type="radio"><span>경기도</span></label>
-        <label><input type="radio"><span>인천광역시</span></label>
-        <label><input type="radio"><span>대전광역시</span></label>
-        <label><input type="radio"><span>세종특별자치시</span></label>
-        <label><input type="radio"><span>충청남도</span></label>
-        <label><input type="radio"><span>충청북도</span></label>
-        <label><input type="radio"><span>광주광역시</span></label>
-        <label><input type="radio"><span>전라남도</span></label>
-        <label><input type="radio"><span>전라북도</span></label>
-        <label><input type="radio"><span>대구광역시</span></label>
-        <label><input type="radio"><span>경상북도</span></label>
-        <label><input type="radio"><span>부산광역시</span></label>
-        <label><input type="radio"><span>울산광역시</span></label>
-        <label><input type="radio"><span>경상남도</span></label>
-        <label><input type="radio"><span>강원도</span></label>
-        <label><input type="radio"><span>제주도</span></label>
+        <label v-for="location in locationDepth1" :key="location.id" @change="changeLocationDepth1(location)"><input type="radio" :value="location.code" v-model="selectedLocationDepth1"><span>{{ location.name }}</span></label>
       </div>
       <div class="depth2">
-        <label><input type="radio"><span>강남구</span></label>
-        <label><input type="radio"><span>강동구</span></label>
-        <label><input type="radio"><span>강북구</span></label>
-        <label><input type="radio"><span>강서구</span></label>
-        <label><input type="radio"><span>관악구</span></label>
-        <label><input type="radio"><span>광진구</span></label>
-        <label><input type="radio"><span>구로구</span></label>
-        <label><input type="radio"><span>금천구</span></label>
-        <label><input type="radio"><span>노원구</span></label>
-        <label><input type="radio"><span>도봉구</span></label>
-        <label><input type="radio"><span>동대문구</span></label>
-        <label><input type="radio"><span>동작구</span></label>
-        <label><input type="radio"><span>마포구</span></label>
-        <label><input type="radio"><span>서대문구</span></label>
-        <label><input type="radio"><span>서초구</span></label>
-        <label><input type="radio"><span>성동구</span></label>
-        <label><input type="radio"><span>성북구</span></label>
-        <label><input type="radio"><span>송파구</span></label>
-        <label><input type="radio"><span>양천구</span></label>
-        <label><input type="radio"><span>영등포구</span></label>
-        <label><input type="radio"><span>용산구</span></label>
-        <label><input type="radio"><span>은평구</span></label>
-        <label><input type="radio"><span>종로구</span></label>
-        <label><input type="radio"><span>중구</span></label>
-        <label><input type="radio"><span>중랑구</span></label>
+        <label v-for="location in locationDepth2" :key="location.id"><input type="radio" :value="location.code" v-model="selectedLocationDepth2"><span>{{ location.name }}</span></label>
       </div>
     </div>
   </article>
@@ -78,13 +38,26 @@
 
 <script>
   import { mapState, mapMutations, mapActions } from 'vuex';
+  import location from '~/static/json/location';
 
   export default {
     data: () => ({
-      step: 1
+      step: 1,
+      locationDepth1: location,
+      locationDepth2: null,
+
+      selectedLocationDepth1: null,
+      selectedLocationDepth2: null
     }),
     layout: 'popup',
-    methods: {}
+    mounted() {
+      console.log(this.locationDepth1[0].gugun);
+    },
+    methods: {
+      changeLocationDepth1(location) {
+        this.locationDepth2 = location.gugun;
+      }
+    }
   }
 </script>
 
@@ -115,18 +88,22 @@
       }
     }
   }
-  .add_location {overflow-y: scroll; height: calc(100vh - 80px);
-    .depth1 {float: left; width: 250px; min-height: calc(100vh - 80px); padding: 30px 0 30px 35px;  bottom: 1px solid #e4eaef; background: #f8f8f8;
+  .add_location {overflow: hidden;
+    .depth1 {float: left; overflow-y: scroll; height: calc(100vh - 80px); width: 250px; padding: 30px 0 30px 35px;  bottom: 1px solid #e4eaef; background: #f8f8f8;
       label {display: block; position: relative; margin: 40px 0 0;
         &:first-child {margin-top: 0;}
-        input {position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0;}
-        span {font-size: 30px; color: #000000;}
+        input {position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0;
+          &:checked + span {font-weight: 700; color: #2699fb;}
+        }
+        span {font-size: 28px; color: #000000;}
       }
     }
-    .depth2 {float: left; width: 500px; overflow: hidden; padding: 30px 0 30px 60px; margin: 0 0 -26px;
+    .depth2 {float: left; overflow-y: scroll; height: calc(100vh - 80px); width: 500px; padding: 30px 0 30px 60px; margin: 0 0 -26px;
       label {display: block; position: relative; float: left; width: 220px; margin: 0 0 26px;
-        input {position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0;}
-        span {font-size: 30px; color: #747474;}
+        input {position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0;
+          &:checked + span {font-weight: 700; color: #2699fb;}
+        }
+        span {font-size: 28px; color: #747474;}
       }
     }
   }

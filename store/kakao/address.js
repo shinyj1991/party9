@@ -1,20 +1,60 @@
 import axios from 'axios';
 
 export const state = () => ({
-  address: null
+  address: null,
+  coord: null,
+  addressList: null
 })
 
 export const mutations = {
   getAddress: (state, res) => {
-    // 받아온 view데이터를 state.view에 저장, todo/_id.vue 파일에서 computed로 가져옴
-    state.detail = res;
+    console.log(res.data.documents[0]);
+    if (res.data.documents[0].road_address) {
+      state.address = res.data.documents[0].road_address.address_name;
+    } else {
+      state.address = res.data.documents[0].address.address_name;
+    }
+  },
+  getAddressList: (state, res) => {
+    state.addressList = res.data;
+  },
+  getCoord: (state, res) => {
+    state.coord = res.data.documents[0];
   }
 }
 
 export const actions = {
-  getAddress({ commit }, query) {
+  getAddressList({ commit }, query, page) {
     // rest api로 view 데이터 가져오기
     axios.get('https://dapi.kakao.com/v2/local/search/keyword.json', {
+      headers: {
+        Authorization: 'KakaoAK 156c5cafe5aa24764f279797c864d451'
+      },
+      params: {
+        query: query,
+        page: page
+      }
+    }).then(res => {
+      commit('getAddressList', res);
+    }).catch(err => {
+      console.log(err);
+    });
+  },
+  coord2address({ commit }, params) {
+    axios.get('https://dapi.kakao.com/v2/local/geo/coord2address.json', {
+      headers: {
+        Authorization: 'KakaoAK 156c5cafe5aa24764f279797c864d451'
+      },
+      params: params
+    }).then(res => {
+      console.log(res);
+      commit('getAddress', res);
+    }).catch(err => {
+      console.log(err);
+    });
+  },
+  getAddress({ commit, dispatch }, query) {
+    axios.get('https://dapi.kakao.com/v2/local/search/address.json', {
       headers: {
         Authorization: 'KakaoAK 156c5cafe5aa24764f279797c864d451'
       },
@@ -22,9 +62,7 @@ export const actions = {
         query: query
       }
     }).then(res => {
-      // mutations.getTodoView 함수 호출
-      console.log(res.data);
-      commit('getAddress', res);
+      commit('getCoord', res);
     }).catch(err => {
       console.log(err);
     });

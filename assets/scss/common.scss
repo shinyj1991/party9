@@ -9,3 +9,21 @@
 
 /*.layout-enter-active, .layout-leave-active {transition: transform 3000ms; position: fixed; top: 0; right: 0; left: 0; z-index: 9999;}
 .layout-enter, .layout-leave-to {opacity: 0; transform: translateY(150px);}*/
+
+._radio {display: inline-block; position: relative;
+  input {position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0;
+    &:checked + span:before {border: 7px solid #2699fb;}
+  }
+  span {display: block; position: relative; padding: 0 0 0 32px; font-size: 26px; line-height: 38px; color: #000000;
+    &:before {display: block; content: ''; position: absolute; top: 50%; left: 0; margin: -10px 0 0; width: 20px; height: 20px; border-radius: 100%; border: 1px solid #e5ebef; background: #ffffff;}
+  }
+}
+
+._checkbox {display: inline-block; position: relative;
+  input {position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0;
+    &:checked + span:before {border: none; background: url(~static/images/ico/checkbox_20x20_blue_on.png) 0 0 no-repeat;}
+  }
+  span {display: block; position: relative; padding: 0 0 0 32px; font-size: 26px; line-height: 38px; color: #000000;
+    &:before {display: block; content: ''; position: absolute; top: 50%; left: 0; margin: -10px 0 0; width: 20px; height: 20px; border-radius: 3px; border: 1px solid #e4eaef; background: #ffffff;}
+  }
+}
