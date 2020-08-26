@@ -47,13 +47,13 @@ export const actions = {
       },
       params: params
     }).then(res => {
-      console.log(res);
       commit('getAddress', res);
     }).catch(err => {
       console.log(err);
     });
   },
-  getAddress({ commit, dispatch }, query) {
+  getAddress({ commit }, query) {
+    console.log(query);
     axios.get('https://dapi.kakao.com/v2/local/search/address.json', {
       headers: {
         Authorization: 'KakaoAK 156c5cafe5aa24764f279797c864d451'

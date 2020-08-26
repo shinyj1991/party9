@@ -43,10 +43,11 @@
   export default {
     data: () => ({
       step: 1,
-      locationDepth1: location,
-      locationDepth2: null,
 
-      selectedLocationDepth1: null,
+      locationDepth1: location,
+      locationDepth2: location[0].gugun,
+
+      selectedLocationDepth1: '01',
       selectedLocationDepth2: null
     }),
     layout: 'popup',

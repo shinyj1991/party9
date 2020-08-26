@@ -52,9 +52,11 @@
     <div class="step3" :class="{on: step === 3}">
       <div class="photo_title">
         <div class="photo">
-          <input type="file">
+          <img src="~static/images/common/default_attach.png" id="preview" alt="">
+          <input type="file" @change="photoPreview">
         </div>
         <div class="title">
+          <div id="image_container"></div>
           <p class="label">제목</p>
           <input type="text" placeholder="제목을 입력해주세요">
         </div>
@@ -187,12 +189,12 @@
       step: 1,
 
       locationDepth1: location,
-      locationDepth2: null,
+      locationDepth2: location[0].gugun,
 
-      selectedLocationDepth1: null,
+      selectedLocationDepth1: '01',
       selectedLocationDepth2: null,
 
-      selectedLocationDepth1Name: null,
+      selectedLocationDepth1Name: '서울특별시',
       selectedLocationDepth2Name: null,
 
       addressKeyword: '',
@@ -224,6 +226,15 @@
       });
     },
     methods: {
+      photoPreview() {
+        let reader = new FileReader();
+        
+        reader.onload = () => {
+          document.querySelector('img#preview').setAttribute('src', event.target.result);
+        };
+        
+        reader.readAsDataURL(event.target.files[0]);
+      },
       createComplete() {
         this.$router.push('/party');
       },
@@ -307,7 +318,8 @@
   .step3 {position: absolute; left: 9999px; padding: 55px 30px;
     &.on {position: relative; left: 0;}
     .photo_title {display: flex; justify-content: space-between;
-      .photo {overflow: hidden; position: relative; width: 100px; height: 126px; background: url(~static/images/common/default_attach.png) 0 0 no-repeat;
+      .photo {overflow: hidden; position: relative; width: 100px; height: 126px;
+        img {width: 100px; height: 126px;}
         input {position: absolute; top: 0; right: 0; font-size: 100px;}
       }
       .title {width: 560px;
