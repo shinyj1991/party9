@@ -53,7 +53,7 @@
       <div class="photo_title">
         <div class="photo">
           <img src="~static/images/common/default_attach.png" id="preview" alt="">
-          <input type="file" @change="photoPreview">
+          <input type="file" @change="photoPreview" accept="image/*;capture=camera">
         </div>
         <div class="title">
           <div id="image_container"></div>
