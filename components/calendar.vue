@@ -265,13 +265,13 @@
         &.p10 {color: #000000;}
       }
     }
-    .calendar {
+    .calendar {padding: 0 10px;
       table thead tr th {height: 40px;}
       table tbody tr td {
         .datebox {position: relative; height: calc((50vh - 136px) / 5);
           .date {width: 36px; height: 36px; border-radius: 50%; position: absolute; top: 0; left: 0; text-align: center;}
           &.today .date {background: #cccccc;}
-          .score {font-weight: 700; font-size: 30px; line-height: calc((50vh - 136px) / 5); text-align: center;}
+          .score {font-weight: 700; font-size: 36px; line-height: calc((50vh - 136px) / 5); text-align: center;}
           &.p100 .score {color: #fbba00;}
           &.p90 .score {color: #34a853;}
           &.p80 .score {color: #34a853;}

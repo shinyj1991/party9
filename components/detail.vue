@@ -29,7 +29,7 @@
         </li>
       </ul>
     </div>
-    <button class="task_admin">task admin</button>
+    <nuxt-link to="/admin" class="task_admin">task admin</nuxt-link>
   </article>
 </template>
 
