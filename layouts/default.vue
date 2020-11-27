@@ -1,7 +1,6 @@
 <template>
   <div id="default" :class="{ loaded: appLoaded }">
     <nuxt/>
-    <global-navigation></global-navigation>
   </div>
 </template>
 
@@ -18,11 +17,6 @@ export default {
 
 <style lang="scss">
 body {background: #ffffff;}
-#default {width: 750px; margin: 0 auto; background: #ffffff;
-  &:before {display: block; content: ''; position: fixed; top: 0; right: 0; left: 0; z-index: 9999; height: 100%; background: linear-gradient(180deg, rgba(134,213,254,1) 0%, rgba(46,145,220,1) 100%);}
-  &:after {display: block; content: ''; position: fixed; top: 0; right: 0; left: 0; z-index: 9999; height: 100%; background: url(~static/images/ico/logo_229x189.png) center center no-repeat;}
-  &.loaded:before {opacity: 0; height: 0; transition: opacity 1000ms, height 1ms 1000ms;}
-  &.loaded:after {opacity: 0; height: 0; transition: opacity 1000ms, height 1ms 1000ms;}
-}
+#default {width: 750px; margin: 0 auto; background: #ffffff;}
 </style>
 

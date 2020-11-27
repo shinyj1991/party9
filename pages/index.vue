@@ -1,8 +1,7 @@
 <template>
   <article id="index">
-    <p>hello</p>
-    <!-- <button1 @click="kakaoLogin">카카오로그인</button1> -->
-    <global-navigation></global-navigation>
+    <Calendar></Calendar>
+    <Detail></Detail>
   </article>
 </template>
 

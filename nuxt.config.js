@@ -11,7 +11,7 @@ module.exports = {
     }
   },
   head: {
-    title: 'PARTY9',
+    title: 'dailyscore',
     meta: [
       { charset: 'utf-8' },
       { hid: 'description', name: 'description', content: 'Welcome to SIMPLIZM.' },
