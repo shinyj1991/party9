@@ -9,22 +9,36 @@
         <li>
           <label>
             <input type="checkbox" checked>
-            <span class="task">아침운동</span>
+            <span class="task">영양제 챙겨먹기</span>
+            <span class="score">10</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" checked>
+            <span class="task">운동하기</span>
             <span class="score">30</span>
           </label>
         </li>
         <li>
           <label>
             <input type="checkbox" checked>
-            <span class="task">독서하기</span>
-            <span class="score">30</span>
+            <span class="task">30분 독서하기</span>
+            <span class="score">20</span>
           </label>
         </li>
         <li>
           <label>
             <input type="checkbox" checked>
-            <span class="task">청소하기</span>
-            <span class="score">40</span>
+            <span class="task">방 청소하기</span>
+            <span class="score">10</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" checked>
+            <span class="task">지출 만원 이하로 하기</span>
+            <span class="score">30</span>
           </label>
         </li>
       </ul>

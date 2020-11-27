@@ -2,7 +2,7 @@
   <article id="calendar">
     <div class="head">
       <h1 class="title">2020. 11</h1>
-      <div class="average p70">70.11</div>
+      <div class="average p70">74.23</div>
     </div>
     <div class="calendar">
       <table>
@@ -129,9 +129,9 @@
               </div>
             </td>
             <td>
-              <div class="datebox p10">
+              <div class="datebox p100">
                 <div class="date">17</div>
-                <div class="score">15</div>
+                <div class="score">100</div>
               </div>
             </td>
             <td>
